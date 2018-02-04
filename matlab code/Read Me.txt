@@ -1,0 +1,8 @@
+Matlab_flatfish
+---------------
+->basic simulation of flatfish auv without external forces with W=B+x|x is real
+->Run main function
+->AUV parameters in auv_dynamics
+->final_plot will plot pose of system
+->jacob-jacobian
+
