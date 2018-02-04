@@ -1,0 +1,24 @@
+<!-- saved from url=(0014)about:internet -->
+<pre class="code">
+<span class="srcline"><span class="lineno"><a href="12,1" id="srcline1"> 1</a></span><span class="line"><span class="keyword">function</span> <span class="var type1" id="S2T1U3">vdot</span> = fcn(<span class="var type1" id="S3T1U6">u</span>)</span></span>
+<span class="srcline"><span class="lineno"><a href="12,2" id="srcline2"> 2</a></span><span class="line"><span class="mxinfo " id="T1:U3"><span class="var type1" id="S4T1U9">sum1</span> = <span class="var type1" id="S3T1U10">u</span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="12,3" id="srcline3"> 3</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="12,4" id="srcline4"> 4</a></span><span class="line"><span class="mxinfo " id="T9:U6"><span class="var type1" id="S5T9U13">M_rb</span>=<span class="mxinfo " id="T9:U8">[1462  0      0     0       0        0;</span></span>
+<span class="srcline"><span class="lineno"><a href="12,5" id="srcline5"> 5</a></span><span class="line">      0     1462   0     0       0        -32.16;</span></span>
+<span class="srcline"><span class="lineno"><a href="12,6" id="srcline6"> 6</a></span><span class="line">      0     0      1462  0       32.16    0;</span></span>
+<span class="srcline"><span class="lineno"><a href="12,7" id="srcline7"> 7</a></span><span class="line">      0     0      0     498.63  0        0;</span></span>
+<span class="srcline"><span class="lineno"><a href="12,8" id="srcline8"> 8</a></span><span class="line">      0     0      32.16 0       1850.34  0;</span></span>
+<span class="srcline"><span class="lineno"><a href="12,9" id="srcline9"> 9</a></span><span class="line">      0     -32.16 0     0       0        2348.97]</span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="12,10" id="srcline10">10</a></span><span class="line">  </span></span>
+<span class="srcline"><span class="lineno"><a href="12,11" id="srcline11">11</a></span><span class="line"><span class="mxinfo " id="T9:U9"><span class="var type1" id="S6T9U61">M_a</span>=<span class="mxinfo " id="T9:U11">[323.10 0       0       0       0       0;</span></span>
+<span class="srcline"><span class="lineno"><a href="12,12" id="srcline12">12</a></span><span class="line">     0      1049.21 0       0       0       -999.04;</span></span>
+<span class="srcline"><span class="lineno"><a href="12,13" id="srcline13">13</a></span><span class="line">     0      0       7040.36 0       -277.20 0;</span></span>
+<span class="srcline"><span class="lineno"><a href="12,14" id="srcline14">14</a></span><span class="line">     0      0       0       645.85  0       0;</span></span>
+<span class="srcline"><span class="lineno"><a href="12,15" id="srcline15">15</a></span><span class="line">     0      0       -277.20 0       7045.28 0;</span></span>
+<span class="srcline"><span class="lineno"><a href="12,16" id="srcline16">16</a></span><span class="line">     0      -996.04 0       0       0       8584.25]</span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="12,17" id="srcline17">17</a></span><span class="line"> </span></span>
+<span class="srcline"><span class="lineno"><a href="12,18" id="srcline18">18</a></span><span class="line"><span class="mxinfo " id="T9:U12"><span class="var type1" id="S7T9U111">M</span>=<span class="mxinfo " id="T9:U14"><span class="var type1" id="S5T9U113">M_rb</span>+<span class="var type1" id="S6T9U114">M_a</span></span></span>; </span></span>
+<span class="srcline"><span class="lineno"><a href="12,19" id="srcline19">19</a></span><span class="line"><span class="mxinfo " id="T1:U17"><span class="var type1" id="S2T1U117">vdot</span> = <span class="mxinfo " id="T1:U19"><span class="mxinfo " id="T9:U20">inv(<span class="var type1" id="S7T9U121">M</span>)</span>*<span class="var type1" id="S4T1U122">sum1</span></span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="12,20" id="srcline20">20</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="12,21" id="srcline21">21</a></span><span class="line"><span class="keyword">end</span></span></span>
+</pre>
