@@ -34,7 +34,7 @@ x=[ 1.25*dimension  dimension 0;
    -1.25*dimension -dimension 0;
     1.25*dimension -dimension 0;
     dimension+0.75*dimension 0 0];
-pause(10);
+for i = 
 for count=1:sz_positiondata(1)
 
 c_p=cos(phi(count));
@@ -70,7 +70,7 @@ end
     end
     jj=line([final_pt(1,1) final_pt(i+1,1)], [final_pt(1,2) final_pt(i+1,2)], [final_pt(1,3) final_pt(i+1,3)]);
     
-pause(0.2);
+pause(0.1);
     
 if count<sz_positiondata(1)
     delete(jj)
