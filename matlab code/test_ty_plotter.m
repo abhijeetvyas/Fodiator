@@ -8,7 +8,7 @@ phi=position_g.Data(:,4);
 theta=position_g.Data(:,5);
 si=position_g.Data(:,6);
 
-dimension=3;
+dimension=2;
 
 x_range=abs(min(position_g.Data(:,1)))+abs(max(position_g.Data(:,1)));
 y_range=abs(min(position_g.Data(:,2)))+abs(max(position_g.Data(:,2)));
@@ -34,7 +34,7 @@ x=[ 1.25*dimension  dimension 0;
    -1.25*dimension -dimension 0;
     1.25*dimension -dimension 0;
     dimension+0.75*dimension 0 0];
-pause(10);
+pause(2);
 for count=1:sz_positiondata(1)
 
 c_p=cos(phi(count));
