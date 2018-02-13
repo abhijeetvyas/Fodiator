@@ -1,0 +1,365 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>init</title><meta name="generator" content="MATLAB 8.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2013-11-14"><meta name="DC.source" content="init.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput">clear <span class="string">all</span>
+close <span class="string">all</span>
+clc
+
+<span class="comment">% global dia</span>
+<span class="comment">% global rad</span>
+<span class="comment">% global height</span>
+<span class="comment">% global vol</span>
+<span class="comment">% global m</span>
+<span class="comment">% global rho_water</span>
+<span class="comment">% global rho_cyl</span>
+<span class="comment">% global W</span>
+<span class="comment">% global B</span>
+<span class="comment">% global cg</span>
+<span class="comment">% global cb</span>
+<span class="comment">% global store_count</span>
+<span class="comment">% global forces</span>
+<span class="comment">% global q0</span>
+
+store_count=0;
+
+dia=0.3;                    <span class="comment">%Diameter</span>
+rad=dia/2;                   <span class="comment">%Radius</span>
+height=0.8;                  <span class="comment">%Height</span>
+vol=pi*(rad^2)*height;       <span class="comment">%Volume</span>
+rho_water=1000;              <span class="comment">%Density of water</span>
+B=vol*rho_water*9.8;         <span class="comment">%Buoyancy</span>
+<span class="comment">%m=100.531;                  %mass</span>
+<span class="comment">%W=m*9.8;                    %Weight</span>
+W=B+1;
+m=W/9.8;
+rho_cyl=m/vol;              <span class="comment">%Density of cylinder</span>
+
+cg=[0 0 0];                 <span class="comment">%Centre of Gravity</span>
+cb=[0 0 0];                 <span class="comment">%Centre of Buoyancy</span>
+
+deg_to_rad = pi/180;
+rad_to_deg = 180/pi;
+
+q0=[10 10 10 0*deg_to_rad 0*deg_to_rad 0*deg_to_rad 0 0 0 0*deg_to_rad 0*deg_to_rad 0*deg_to_rad];
+
+sim(<span class="string">'cyl_sim'</span>)
+
+t=tout;
+out=q;
+
+subplot(3,2,1),plot(t,out(:,1));
+grid <span class="string">on</span>
+title(<span class="string">'\fontsize{14} Surge'</span>);
+xlabel(<span class="string">'Time(s)'</span>);
+ylabel(<span class="string">'X'</span>);
+
+subplot(3,2,3),plot(t,out(:,2));
+grid <span class="string">on</span>
+title(<span class="string">'\fontsize{14} Sway'</span>);
+xlabel(<span class="string">'Time (s)'</span>);
+ylabel(<span class="string">'Y'</span>);
+
+subplot(3,2,5),plot(t,out(:,3));
+grid <span class="string">on</span>
+title(<span class="string">'\fontsize{14} Heave'</span>);
+xlabel(<span class="string">'Time(s)'</span>);
+ylabel(<span class="string">'Z'</span>);
+
+subplot(3,2,2),plot(t,out(:,7));
+grid <span class="string">on</span>
+title(<span class="string">'\fontsize{14} Surge Velocity'</span>);
+xlabel(<span class="string">'Time(s)'</span>);
+ylabel(<span class="string">'Xdot'</span>);
+
+subplot(3,2,4),plot(t,out(:,8));
+grid <span class="string">on</span>
+title(<span class="string">'\fontsize{14} Sway Velocity'</span>);
+xlabel(<span class="string">'Time(s)'</span>);
+ylabel(<span class="string">'Ydot'</span>);
+
+subplot(3,2,6),plot(t,out(:,9));
+grid <span class="string">on</span>
+title(<span class="string">'\fontsize{14} Heave Velocity'</span>);
+xlabel(<span class="string">'Time(s)'</span>);
+ylabel(<span class="string">'Heave'</span>);
+
+figure
+
+subplot(3,2,1),plot(t,out(:,4)*rad_to_deg);
+grid <span class="string">on</span>
+title(<span class="string">'\fontsize{14} Roll'</span>);
+xlabel(<span class="string">'Time(s)'</span>);
+ylabel(<span class="string">'Phi'</span>);
+
+subplot(3,2,3),plot(t,out(:,5)*rad_to_deg);
+grid <span class="string">on</span>
+title(<span class="string">'\fontsize{14} Pitch'</span>);
+xlabel(<span class="string">'Time(s)'</span>);
+ylabel(<span class="string">'Theta'</span>);
+
+subplot(3,2,5),plot(t,out(:,6)*rad_to_deg);
+grid <span class="string">on</span>
+title(<span class="string">'\fontsize{14} Yaw'</span>);
+xlabel(<span class="string">'Time(s)'</span>);
+ylabel(<span class="string">'Psi'</span>);
+
+subplot(3,2,2),plot(t,out(:,10)*rad_to_deg);
+grid <span class="string">on</span>
+title(<span class="string">'\fontsize{14} Rolldot'</span>);
+xlabel(<span class="string">'Time(s)'</span>);
+ylabel(<span class="string">'Phidot'</span>);
+
+subplot(3,2,4),plot(t,out(:,11)*rad_to_deg);
+grid <span class="string">on</span>
+title(<span class="string">'\fontsize{14} Pitchdot'</span>);
+xlabel(<span class="string">'Time(s)'</span>);
+ylabel(<span class="string">'Thetadot'</span>);
+
+subplot(3,2,6),plot(t,out(:,12)*rad_to_deg);
+grid <span class="string">on</span>
+title(<span class="string">'\fontsize{14} Yawdot'</span>);
+xlabel(<span class="string">'Time(s)'</span>);
+ylabel(<span class="string">'Psidot'</span>);
+
+<span class="comment">% figure</span>
+<span class="comment">%</span>
+<span class="comment">% subplot(3,1,1),plot(forces(:,1),forces(:,2));</span>
+<span class="comment">% grid on</span>
+<span class="comment">% title('\fontsize{14} Force in X');</span>
+<span class="comment">% xlabel('Time(s)');</span>
+<span class="comment">% ylabel('X_Force');</span>
+<span class="comment">%</span>
+<span class="comment">% subplot(3,1,2),plot(forces(:,1),forces(:,3));</span>
+<span class="comment">% grid on</span>
+<span class="comment">% title('\fontsize{14} Force in Y');</span>
+<span class="comment">% xlabel('Time(s)');</span>
+<span class="comment">% ylabel('Y_Force');</span>
+
+<span class="comment">% subplot(3,1,3),plot(forces(:,1),forces(:,4));</span>
+<span class="comment">% grid on</span>
+<span class="comment">% title('\fontsize{14} Forces in Z');</span>
+<span class="comment">% xlabel('Time(s)');</span>
+<span class="comment">% ylabel('Z_Force');</span>
+
+figure
+final_plot_cyl(t,out(:,1:6),rad,height,10)
+</pre><pre class="codeoutput">Warning: Using a default value of 2.0 for maximum step size.  The simulation
+step size will be equal to or less than this value.  You can disable this
+diagnostic by setting 'Automatic solver parameter selection' diagnostic to
+'none' in the Diagnostics page of the configuration parameters dialog 
+Warning: The model 'cyl_sim' has the 'Configuration Parameters' &gt; 'Data
+Import/Export' &gt; 'Signal logging format' parameter set to 'ModelDataLogs'.  The
+signal logging save format 'ModelDataLogs' will be removed in a future release.
+To take advantage of new functionality, update models that use 'ModelDataLogs'
+signal logging format to use the 'Dataset' format.  For help with resolving this
+and other upgrade issues, use the Simulink Upgrade Advisor. 
+</pre><img vspace="5" hspace="5" src="init_01.png" alt=""> <img vspace="5" hspace="5" src="init_02.png" alt=""> <img vspace="5" hspace="5" src="init_03.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clear all
+close all
+clc
+
+% global dia
+% global rad
+% global height
+% global vol
+% global m
+% global rho_water
+% global rho_cyl
+% global W
+% global B
+% global cg
+% global cb 
+% global store_count
+% global forces
+% global q0
+
+store_count=0;
+
+dia=0.3;                    %Diameter
+rad=dia/2;                   %Radius
+height=0.8;                  %Height
+vol=pi*(rad^2)*height;       %Volume
+rho_water=1000;              %Density of water
+B=vol*rho_water*9.8;         %Buoyancy
+%m=100.531;                  %mass
+%W=m*9.8;                    %Weight
+W=B+1;
+m=W/9.8;
+rho_cyl=m/vol;              %Density of cylinder
+
+cg=[0 0 0];                 %Centre of Gravity
+cb=[0 0 0];                 %Centre of Buoyancy
+
+deg_to_rad = pi/180;   
+rad_to_deg = 180/pi;
+
+q0=[10 10 10 0*deg_to_rad 0*deg_to_rad 0*deg_to_rad 0 0 0 0*deg_to_rad 0*deg_to_rad 0*deg_to_rad];
+
+sim('cyl_sim')
+
+t=tout;
+out=q;
+
+subplot(3,2,1),plot(t,out(:,1));
+grid on
+title('\fontsize{14} Surge');
+xlabel('Time(s)');
+ylabel('X');
+
+subplot(3,2,3),plot(t,out(:,2));
+grid on
+title('\fontsize{14} Sway');
+xlabel('Time (s)');
+ylabel('Y');
+
+subplot(3,2,5),plot(t,out(:,3));
+grid on
+title('\fontsize{14} Heave');
+xlabel('Time(s)');
+ylabel('Z');
+
+subplot(3,2,2),plot(t,out(:,7));
+grid on
+title('\fontsize{14} Surge Velocity');
+xlabel('Time(s)');
+ylabel('Xdot');
+
+subplot(3,2,4),plot(t,out(:,8));
+grid on
+title('\fontsize{14} Sway Velocity');
+xlabel('Time(s)');
+ylabel('Ydot');
+
+subplot(3,2,6),plot(t,out(:,9));
+grid on
+title('\fontsize{14} Heave Velocity');
+xlabel('Time(s)');
+ylabel('Heave');
+
+figure
+
+subplot(3,2,1),plot(t,out(:,4)*rad_to_deg);
+grid on
+title('\fontsize{14} Roll');
+xlabel('Time(s)');
+ylabel('Phi');
+
+subplot(3,2,3),plot(t,out(:,5)*rad_to_deg);
+grid on
+title('\fontsize{14} Pitch');
+xlabel('Time(s)');
+ylabel('Theta');
+
+subplot(3,2,5),plot(t,out(:,6)*rad_to_deg);
+grid on
+title('\fontsize{14} Yaw');
+xlabel('Time(s)');
+ylabel('Psi');
+
+subplot(3,2,2),plot(t,out(:,10)*rad_to_deg);
+grid on
+title('\fontsize{14} Rolldot');
+xlabel('Time(s)');
+ylabel('Phidot');
+
+subplot(3,2,4),plot(t,out(:,11)*rad_to_deg);
+grid on
+title('\fontsize{14} Pitchdot');
+xlabel('Time(s)');
+ylabel('Thetadot');
+
+subplot(3,2,6),plot(t,out(:,12)*rad_to_deg);
+grid on
+title('\fontsize{14} Yawdot');
+xlabel('Time(s)');
+ylabel('Psidot');
+
+% figure
+% 
+% subplot(3,1,1),plot(forces(:,1),forces(:,2));
+% grid on
+% title('\fontsize{14} Force in X');
+% xlabel('Time(s)');
+% ylabel('X_Force');
+% 
+% subplot(3,1,2),plot(forces(:,1),forces(:,3));
+% grid on
+% title('\fontsize{14} Force in Y');
+% xlabel('Time(s)');
+% ylabel('Y_Force');
+
+% subplot(3,1,3),plot(forces(:,1),forces(:,4));
+% grid on
+% title('\fontsize{14} Forces in Z');
+% xlabel('Time(s)');
+% ylabel('Z_Force');
+
+figure
+final_plot_cyl(t,out(:,1:6),rad,height,10)
+##### SOURCE END #####
+--></body></html>

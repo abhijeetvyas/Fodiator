@@ -1,0 +1,6 @@
+Simulink cylinder
+-----------------
+->basic cylinder without external forces and moments
+->buoyancy can be changed in init with W=B+x|x is real
+->run init
+->final_plot_cyl to plot the pose of the cylinder
