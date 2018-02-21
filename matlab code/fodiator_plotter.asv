@@ -3,7 +3,7 @@
 clear all;
 close all;
 clc
-a = 20;
+
 load('alpha_Cd_Cl.mat');
 load('Thrust_PWM.mat');
 
@@ -24,15 +24,15 @@ phi=etapos.Data(:,4);
 theta=etapos.Data(:,5);
 si=etapos.Data(:,6);
 
-dimension=1;
+dimension=2;
 
 x_range=abs(min(etapos.Data(:,1)))+abs(max(etapos.Data(:,1)));
 y_range=abs(min(etapos.Data(:,2)))+abs(max(etapos.Data(:,2)));
 
 if x_range>=y_range
-    axis([min(x1)-a*dimension max(x1)+a*dimension min(x1)-a*dimension max(x1)+a*dimension min(z1)-a*dimension max(z1)+a*dimension])
+    axis([min(x1)-3*dimension max(x1)+3*dimension min(x1)-3*dimension max(x1)+3*dimension min(z1)-3*dimension max(z1)+3*dimension])
 else
-    axis([min(y1)-a*dimension max(y1)+a*dimension min(y1)-a*dimension max(y1)+a*dimension min(z1)-a*dimension max(z1)+a*dimension])
+    axis([min(y1)-3*dimension max(y1)+3*dimension min(y1)-3*dimension max(y1)+3*dimension min(z1)-3*dimension max(z1)+3*dimension])
 end
 
 grid on;box on;
@@ -122,21 +122,21 @@ title('\fontsize{10} Zpos');
 xlabel('Time(s)');
 ylabel('Zpos');
 
-subplot(3,2,2),plot(t,rad_to_deg*inputdata(:,4));
+subplot(3,2,2),plot(t,inputdata(:,4));
 grid on
-title('\fontsize{10} Rollangle degree');
+title('\fontsize{10} Rollangle');
 xlabel('Time(s)');
 ylabel('Rollangle');
 
-subplot(3,2,4),plot(t,rad_to_deg*inputdata(:,5));
+subplot(3,2,4),plot(t,inputdata(:,5));
 grid on
-title('\fontsize{10} Pitchangle degree');
+title('\fontsize{10} Pitchangle');
 xlabel('Time(s)');
 ylabel('Pitchangle');
 
-subplot(3,2,6),plot(t,rad_to_deg*inputdata(:,6));
+subplot(3,2,6),plot(t,rad_to_deginputdata(:,6));
 grid on
-title('\fontsize{10} Yawangle degree');
+title('\fontsize{10} Yawangle');
 xlabel('Time(s)');
 ylabel('Yawangle');
 
@@ -308,7 +308,7 @@ subplot(3,2,6),plot(t,inputdata(:,6));
 grid on
 title('\fontsize{10} Ext Yaw Moment');
 xlabel('Time(s)');
-ylabel('Ext Mz ');
+ylabel('Ext Mz ');title('\fontsize{10} Net Fz');
 
 
 %%
