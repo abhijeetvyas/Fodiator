@@ -170,7 +170,7 @@ grid on
 title('\fontsize{10} Rolldot');
 xlabel('Time(s)');
 ylabel('Rolldot');
-figure
+
 subplot(3,2,4),plot(t,rad_to_deg*inputdata(:,5));
 grid on
 title('\fontsize{10} Pitchdot');
