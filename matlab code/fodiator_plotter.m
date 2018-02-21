@@ -10,10 +10,10 @@ load('Thrust_PWM.mat');
 deg_to_rad = pi/180;   
 rad_to_deg = 180/pi;
 
-sim('Fodiator_model.slx',[0 1000]);
+sim('Fodiator_model.slx',[0 100]);
 %%
 %Live plotter
-figure('Name','Live Plotter','NumberTitle','off');
+plotter(1)=figure('Name','Live Plotter','NumberTitle','off');
 sz_positiondata=size(etapos.Data);
 sz_tout = size(tout);
 x1 = etapos.Data(:,1);
@@ -100,7 +100,7 @@ end
 
 %%
 
-figure('Name','Eta','NumberTitle','off');
+plotter(2)=figure('Name','Eta','NumberTitle','off');
 inputdata = etapos.Data(:,1:6);
 t=etapos.Time;
 
@@ -143,7 +143,7 @@ ylabel('Yawangle');
 
 %%
 
-figure('Name','EtaDot','NumberTitle','off');
+plotter(3)=figure('Name','EtaDot','NumberTitle','off');
 inputdata = etadot.Data(:,1:6);
 t=etadot.Time;
 
@@ -185,7 +185,7 @@ ylabel('Yawdot');
 
 %%
 
-figure('Name','BodyVel','NumberTitle','off');
+plotter(4)=figure('Name','BodyVel','NumberTitle','off');
 inputdata = vel.Data(:,1:6);
 t=vel.Time;
 
@@ -228,7 +228,7 @@ ylabel('r');
 
 %%
 
-figure('Name','HullForce','NumberTitle','off');
+plotter(5)=figure('Name','HullForce','NumberTitle','off');
 inputdata = bodyforce.Data(:,1:6);
 t=bodyforce.Time;
 
@@ -270,7 +270,7 @@ ylabel('Hull Mz ');
 
 %%
 
-figure('Name','External Force(CP & Thruster)','NumberTitle','off');
+plotter(6)=figure('Name','External Force(CP & Thruster)','NumberTitle','off');
 inputdata = extforce.Data(:,1:6);
 t=extforce.Time;
 
@@ -313,7 +313,7 @@ ylabel('Ext Mz ');title('\fontsize{10} Net Fz');
 
 %%
 
-figure('Name','Net Force','NumberTitle','off');
+plotter(7)=figure('Name','Net Force','NumberTitle','off');
 inputdata = netforce.Data(:,1:6);
 t=netforce.Time;
 
@@ -353,5 +353,45 @@ title('\fontsize{10} Net Yaw Moment');
 xlabel('Time(s)');
 ylabel('Net Mz ');
 
+%%
 
+plotter(8)=figure('Name','Net Force Abs Frame','NumberTitle','off');
+inputdata = netforce_AbsFrame.Data(:,1:6);
+t=netforce.Time;
+
+subplot(3,2,1),plot(t,inputdata(:,1));
+grid on
+title('\fontsize{10} Net Fx');
+xlabel('Time(s)');
+ylabel('Net Fx');
+
+subplot(3,2,3),plot(t,inputdata(:,2));
+grid on
+title('\fontsize{10} Net Fy');
+xlabel('Time(s)');
+ylabel('Net Fy');
+
+subplot(3,2,5),plot(t,inputdata(:,3));
+grid on
+title('\fontsize{10} Net Fz');
+xlabel('Time(s)');
+ylabel('Net Fz');
+
+subplot(3,2,2),plot(t,rad_to_deg*inputdata(:,4));
+grid on
+title('\fontsize{10} Net Roll Moment');
+xlabel('Time(s)');
+ylabel('Net Mx ');
+
+subplot(3,2,4),plot(t,rad_to_deg*inputdata(:,5));
+grid on
+title('\fontsize{10} Net Pitch Moment');
+xlabel('Time(s)');
+ylabel('Net My ');
+
+subplot(3,2,6),plot(t,rad_to_deg*inputdata(:,6));
+grid on
+title('\fontsize{10} Net Yaw Moment');
+xlabel('Time(s)');
+ylabel('Net Mz ');
 
