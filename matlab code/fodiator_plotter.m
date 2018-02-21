@@ -3,7 +3,7 @@
 clear all;
 close all;
 clc
-
+a = 20;
 load('alpha_Cd_Cl.mat');
 load('Thrust_PWM.mat');
 
@@ -24,15 +24,15 @@ phi=etapos.Data(:,4);
 theta=etapos.Data(:,5);
 si=etapos.Data(:,6);
 
-dimension=2;
+dimension=1;
 
 x_range=abs(min(etapos.Data(:,1)))+abs(max(etapos.Data(:,1)));
 y_range=abs(min(etapos.Data(:,2)))+abs(max(etapos.Data(:,2)));
 
 if x_range>=y_range
-    axis([min(x1)-3*dimension max(x1)+3*dimension min(x1)-3*dimension max(x1)+3*dimension min(z1)-3*dimension max(z1)+3*dimension])
+    axis([min(x1)-a*dimension max(x1)+a*dimension min(x1)-a*dimension max(x1)+a*dimension min(z1)-a*dimension max(z1)+a*dimension])
 else
-    axis([min(y1)-3*dimension max(y1)+3*dimension min(y1)-3*dimension max(y1)+3*dimension min(z1)-3*dimension max(z1)+3*dimension])
+    axis([min(y1)-a*dimension max(y1)+a*dimension min(y1)-a*dimension max(y1)+a*dimension min(z1)-a*dimension max(z1)+a*dimension])
 end
 
 grid on;box on;
@@ -124,19 +124,19 @@ ylabel('Zpos');
 
 subplot(3,2,2),plot(t,rad_to_deg*inputdata(:,4));
 grid on
-title('\fontsize{10} Rollangle');
+title('\fontsize{10} Rollangle degree');
 xlabel('Time(s)');
 ylabel('Rollangle');
 
 subplot(3,2,4),plot(t,rad_to_deg*inputdata(:,5));
 grid on
-title('\fontsize{10} Pitchangle');
+title('\fontsize{10} Pitchangle degree');
 xlabel('Time(s)');
 ylabel('Pitchangle');
 
 subplot(3,2,6),plot(t,rad_to_deg*inputdata(:,6));
 grid on
-title('\fontsize{10} Yawangle');
+title('\fontsize{10} Yawangle degree');
 xlabel('Time(s)');
 ylabel('Yawangle');
 
@@ -165,19 +165,19 @@ title('\fontsize{10} Zdot');
 xlabel('Time(s)');
 ylabel('Zdot');
 
-subplot(3,2,2),plot(t,rad_to_deg*inputdata(:,4));
+subplot(3,2,2),plot(t,inputdata(:,4));
 grid on
 title('\fontsize{10} Rolldot');
 xlabel('Time(s)');
 ylabel('Rolldot');
 
-subplot(3,2,4),plot(t,rad_to_deg*inputdata(:,5));
+subplot(3,2,4),plot(t,inputdata(:,5));
 grid on
 title('\fontsize{10} Pitchdot');
 xlabel('Time(s)');
 ylabel('Rolldot');
 
-subplot(3,2,6),plot(t,rad_to_deg*inputdata(:,6));
+subplot(3,2,6),plot(t,inputdata(:,6));
 grid on
 title('\fontsize{10} Yawdot');
 xlabel('Time(s)');
@@ -207,19 +207,19 @@ title('\fontsize{10} w');
 xlabel('Time(s)');
 ylabel('w');
 
-subplot(3,2,2),plot(t,rad_to_deg*inputdata(:,4));
+subplot(3,2,2),plot(t,inputdata(:,4));
 grid on
 title('\fontsize{10} p');
 xlabel('Time(s)');
 ylabel('p');
 
-subplot(3,2,4),plot(t,rad_to_deg*inputdata(:,5));
+subplot(3,2,4),plot(t,inputdata(:,5));
 grid on
 title('\fontsize{10} q');
 xlabel('Time(s)');
 ylabel('q');
 
-subplot(3,2,6),plot(t,rad_to_deg*inputdata(:,6));
+subplot(3,2,6),plot(t,inputdata(:,6));
 grid on
 title('\fontsize{10} r');
 xlabel('Time(s)');
@@ -250,19 +250,19 @@ title('\fontsize{10} Hull Fz');
 xlabel('Time(s)');
 ylabel('Hull Fz');
 
-subplot(3,2,2),plot(t,rad_to_deg*inputdata(:,4));
+subplot(3,2,2),plot(t,inputdata(:,4));
 grid on
 title('\fontsize{10} Hull Roll Moment');
 xlabel('Time(s)');
 ylabel('Hull Mx ');
 
-subplot(3,2,4),plot(t,rad_to_deg*inputdata(:,5));
+subplot(3,2,4),plot(t,inputdata(:,5));
 grid on
 title('\fontsize{10} Hull Pitch Moment');
 xlabel('Time(s)');
 ylabel('Hull My ');
 
-subplot(3,2,6),plot(t,rad_to_deg*inputdata(:,6));
+subplot(3,2,6),plot(t,inputdata(:,6));
 grid on
 title('\fontsize{10} Hull Yaw Moment');
 xlabel('Time(s)');
@@ -292,23 +292,23 @@ title('\fontsize{10} Ext Fz');
 xlabel('Time(s)');
 ylabel('Ext Fz');
 
-subplot(3,2,2),plot(t,rad_to_deg*inputdata(:,4));
+subplot(3,2,2),plot(t,inputdata(:,4));
 grid on
 title('\fontsize{10} Ext Roll Moment');
 xlabel('Time(s)');
 ylabel('Ext Mx ');
 
-subplot(3,2,4),plot(t,rad_to_deg*inputdata(:,5));
+subplot(3,2,4),plot(t,inputdata(:,5));
 grid on
 title('\fontsize{10} Ext Pitch Moment');
 xlabel('Time(s)');
 ylabel('Ext My ');
 
-subplot(3,2,6),plot(t,rad_to_deg*inputdata(:,6));
+subplot(3,2,6),plot(t,inputdata(:,6));
 grid on
 title('\fontsize{10} Ext Yaw Moment');
 xlabel('Time(s)');
-ylabel('Ext Mz ');title('\fontsize{10} Net Fz');
+ylabel('Ext Mz ');
 
 
 %%
@@ -335,19 +335,19 @@ title('\fontsize{10} Net Fz');
 xlabel('Time(s)');
 ylabel('Net Fz');
 
-subplot(3,2,2),plot(t,rad_to_deg*inputdata(:,4));
+subplot(3,2,2),plot(t,inputdata(:,4));
 grid on
 title('\fontsize{10} Net Roll Moment');
 xlabel('Time(s)');
 ylabel('Net Mx ');
 
-subplot(3,2,4),plot(t,rad_to_deg*inputdata(:,5));
+subplot(3,2,4),plot(t,inputdata(:,5));
 grid on
 title('\fontsize{10} Net Pitch Moment');
 xlabel('Time(s)');
 ylabel('Net My ');
 
-subplot(3,2,6),plot(t,rad_to_deg*inputdata(:,6));
+subplot(3,2,6),plot(t,inputdata(:,6));
 grid on
 title('\fontsize{10} Net Yaw Moment');
 xlabel('Time(s)');
@@ -377,19 +377,19 @@ title('\fontsize{10} Net Fz');
 xlabel('Time(s)');
 ylabel('Net Fz');
 
-subplot(3,2,2),plot(t,rad_to_deg*inputdata(:,4));
+subplot(3,2,2),plot(t,inputdata(:,4));
 grid on
 title('\fontsize{10} Net Roll Moment');
 xlabel('Time(s)');
 ylabel('Net Mx ');
 
-subplot(3,2,4),plot(t,rad_to_deg*inputdata(:,5));
+subplot(3,2,4),plot(t,inputdata(:,5));
 grid on
 title('\fontsize{10} Net Pitch Moment');
 xlabel('Time(s)');
 ylabel('Net My ');
 
-subplot(3,2,6),plot(t,rad_to_deg*inputdata(:,6));
+subplot(3,2,6),plot(t,inputdata(:,6));
 grid on
 title('\fontsize{10} Net Yaw Moment');
 xlabel('Time(s)');
