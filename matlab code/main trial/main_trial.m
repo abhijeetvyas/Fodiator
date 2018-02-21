@@ -88,8 +88,8 @@ title('\fontsize{14} Yawdot');
 xlabel('Time(s)');
 ylabel('Psidot');
 %%
-figure
-final_plot(t,q(:,1:6))
+%figure
+%final_plot(t,q(:,1:6))
 % plot_ganesh(t,q(:,1:6))
 
 
