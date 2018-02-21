@@ -10,7 +10,7 @@ load('Thrust_PWM.mat');
 deg_to_rad = pi/180;   
 rad_to_deg = 180/pi;
 
-sim('Fodiator_model.slx',[0 100]);
+sim('Fodiator_model.slx',[0 23]);
 %%
 %Live plotter
 plotter(1)=figure('Name','Live Plotter','NumberTitle','off');
