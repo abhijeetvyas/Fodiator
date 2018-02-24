@@ -10,9 +10,10 @@ load('Thrust_PWM.mat');
 deg_to_rad = pi/180;   
 rad_to_deg = 180/pi;
 
-sim('Fodiator_model.slx',[0, 1000]);
+sim('Fodiator_model.slx',[0 100]);
 %%
 %Live plotter
+<<<<<<< HEAD
 <<<<<<< HEAD
 % plotter(1)=figure('Name','Live Plotter','NumberTitle','off');
 % sz_positiondata=size(etapos.Data);
@@ -99,6 +100,8 @@ sim('Fodiator_model.slx',[0, 1000]);
 %        
 % end
 =======
+=======
+>>>>>>> parent of 2ab58b0... Revert "Revert "shit""
 plotter(1)=figure('Name','Live Plotter','NumberTitle','off');
 sz_positiondata=size(etapos.Data);
 sz_tout = size(tout);
@@ -110,15 +113,25 @@ phi=etapos.Data(:,4);
 theta=etapos.Data(:,5);
 si=etapos.Data(:,6);
 
+<<<<<<< HEAD
 dimension=2;
+=======
+dimension=1;
+>>>>>>> parent of 2ab58b0... Revert "Revert "shit""
 
 x_range=abs(min(etapos.Data(:,1)))+abs(max(etapos.Data(:,1)));
 y_range=abs(min(etapos.Data(:,2)))+abs(max(etapos.Data(:,2)));
 
 if x_range>=y_range
+<<<<<<< HEAD
     axis([min(x1)-3*dimension max(x1)+3*dimension min(x1)-3*dimension max(x1)+3*dimension min(z1)-3*dimension max(z1)+3*dimension])
 else
     axis([min(y1)-3*dimension max(y1)+3*dimension min(y1)-3*dimension max(y1)+3*dimension min(z1)-3*dimension max(z1)+3*dimension])
+=======
+    axis([min(x1)-a*dimension max(x1)+a*dimension min(x1)-a*dimension max(x1)+a*dimension min(z1)-a*dimension max(z1)+a*dimension])
+else
+    axis([min(y1)-a*dimension max(y1)+a*dimension min(y1)-a*dimension max(y1)+a*dimension min(z1)-a*dimension max(z1)+a*dimension])
+>>>>>>> parent of 2ab58b0... Revert "Revert "shit""
 end
 
 grid on;box on;
@@ -183,7 +196,10 @@ if count<sz_positiondata(1)
 end
        
 end
+<<<<<<< HEAD
 >>>>>>> parent of f8e4d0b... test1
+=======
+>>>>>>> parent of 2ab58b0... Revert "Revert "shit""
 
 %%
 
